@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="">
+        用户: <input type="text" class="name"> <br>
+        密码: <input type="text" class="password"> <br>
+        <button class="btn" type="button">注册</button>
+
+    </form>
+
+    <script src='js/jquery-1.12.3.min.js'></script>
+    <script>
+        $(function(){
+            //点击事件 
+            $(".btn").click(function(){
+                //获取用户输入的账号密码   点击的时候 获取
+                var name=$(".name").val();
+                var password=$(".password").val();
+                
+                //ajax请求数据 比较登录 账号密码正确
+                $.ajax({
+                    type:'post',
+                    url:'zhuce.php',
+                    data:{
+                        //账号密码 发送到php  key:value   key是php接收的变量 value是用户输入的账号密码
+                        uname:name,
+                        upsd:password
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data==1){
+                            console.log("注册成功");
+                        }else{
+                            console.log("账号以存在"); 
+                        }
+                    }
+                })
+
+
+            })
+
+
+
+
+        })
+    </script>
+</body>
+</html>
